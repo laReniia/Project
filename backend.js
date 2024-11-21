@@ -3,10 +3,14 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const cors = require('cors');
+const path = require('path');  // Required for serving static files
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
+
+// Serve static files (your frontend HTML, CSS, JS files)
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Endpoint to fetch search results
 app.post('/search', async (req, res) => {
@@ -42,8 +46,8 @@ app.post('/search', async (req, res) => {
     }
 });
 
-// Start server
-const PORT = 3000;
+// Start server on dynamic PORT
+const PORT = process.env.PORT || 3000;  // Use the dynamic PORT if available
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
