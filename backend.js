@@ -12,6 +12,10 @@ app.use(cors());
 // Serve static files (your frontend HTML, CSS, JS files)
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/', (req, res) => {
+    res.send('Welcome to the Google Search Scraper API!');
+});
+
 // Endpoint to fetch search results
 app.post('/search', async (req, res) => {
     const { query } = req.body;
